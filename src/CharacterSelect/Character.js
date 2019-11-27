@@ -6,10 +6,11 @@ class Character extends Component {
     state = {
         name: this.props.name,
         image: this.props.image,
-        money: this.props.money
+        unlocked: this.props.unlocked,
+        selected: this.props.selected
     };
 
-    //
+    //Checks image if null
     hasImageCheck = () => {
         if (this.state.image == null) {
             this.state.image = require("./Images/imagePlaceHolder.jpg");
@@ -17,12 +18,24 @@ class Character extends Component {
         return this.state.image;
     }
 
+    //OnClick
+    onClick() {
+        this.selected = true;
+        console.log(this.selected);
+    }
+
+
+
+
+
+    // ----------------- Render ----------------- //
     render() {
         return (
-            <div >
+            <a className="character"
+                onClick={() => this.onClick()}>
                 <img className="thumbnail" src={this.hasImageCheck()}></img>
                 {this.props.name}
-            </div>
+            </a>
         );
     }
 }

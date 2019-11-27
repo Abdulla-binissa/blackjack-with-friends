@@ -1,5 +1,35 @@
+
+.allCharacters{
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.characterPack{
+    display: inline-block;
+    height: 110px;
+    width: 500px;
+}
+
+.character{
+    float: left;
+    height:100px;
+    width: 100px;
+    margin: auto;
+    
+    text-align: center;
+}
+
 .thumbnail {
     height:70px;
+    width: 70px;
+
     border: 5px solid #5C5B59;
-    border-radius: 40%;
+    border-radius: 20%;
+}
+
+.unlockArea{
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
 }
