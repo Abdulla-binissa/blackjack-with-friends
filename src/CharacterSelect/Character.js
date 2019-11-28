@@ -6,10 +6,10 @@ class Character extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: this.props.name,
+            //originalName: this.props.name,
+            name: (this.props.unlocked) ? this.props.name : "LOCKED" ,
             images: this.props.images,
-            //key: this.props.key,
-            image: this.props.images[2], //Nuetral pic
+            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic
 
             unlocked: this.props.unlocked,
             selected: false,
@@ -19,8 +19,7 @@ class Character extends Component {
 
     //OnClick
     onClick() {
-        //console.log(this.state.name);
-        if(!this.state.unlocked) {
+        if(!this.props.unlocked) {
             console.log("Locked!");
         }
         else {
@@ -37,6 +36,15 @@ class Character extends Component {
                 this.props.handlerCall(false, this.state.name);
             }
         }
+
+        //this.setState({ name: this.props.name});
+        //this.setState({ image: this.props.images[2]});
+    }
+
+    refresh() {
+        console.log("Hi " + this.props.name);
+        this.setState({ name: this.props.name});
+        this.setState({ image: this.props.images[2]});
     }
 
     // ----------------- Render ----------------- //

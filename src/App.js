@@ -45,6 +45,41 @@ class App extends React.Component {
                     require("./CharacterSelect/Images/Smiley.png"), // 3
                     require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
                 },
+                {name: "A-NAME", images:
+                    [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
+                    require("./CharacterSelect/Images/Smiley.png"), // 1
+                    require("./CharacterSelect/Images/Smiley.png"), // 2 Nuetral
+                    require("./CharacterSelect/Images/Smiley.png"), // 3
+                    require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
+                },
+                {name: "B-NAME", images:
+                    [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
+                    require("./CharacterSelect/Images/Smiley.png"), // 1
+                    require("./CharacterSelect/Images/Smiley.png"), // 2 Nuetral
+                    require("./CharacterSelect/Images/Smiley.png"), // 3
+                    require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
+                },
+                {name: "C-NAME", images:
+                    [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
+                    require("./CharacterSelect/Images/Smiley.png"), // 1
+                    require("./CharacterSelect/Images/Smiley.png"), // 2 Nuetral
+                    require("./CharacterSelect/Images/Smiley.png"), // 3
+                    require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
+                },
+                {name: "D-NAME", images:
+                    [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
+                    require("./CharacterSelect/Images/Smiley.png"), // 1
+                    require("./CharacterSelect/Images/Smiley.png"), // 2 Nuetral
+                    require("./CharacterSelect/Images/Smiley.png"), // 3
+                    require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
+                },
+                {name: "E-NAME", images:
+                    [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
+                    require("./CharacterSelect/Images/Smiley.png"), // 1
+                    require("./CharacterSelect/Images/Smiley.png"), // 2 Nuetral
+                    require("./CharacterSelect/Images/Smiley.png"), // 3
+                    require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
+                },
             ],
             selectedCharactersNames: []
         };

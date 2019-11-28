@@ -60,25 +60,55 @@ class CharacterSelect extends Component {
     //// UNLOCK WITH CODES ////
     // Unlocks Characters depending on password inputted
     unlockOnClick() {
-        console.log(this.state.unlockInput);
+        var unlockedPackIndexesTEMP = this.state.unlockedPackIndexes;
         switch (this.state.unlockInput) {
-            case "Trumpy Trump":
-                // code block
+            case "A":
+                unlockedPackIndexesTEMP.push(1);
                 break;
-            case "Howdy Howdy":
-                // code block
+            case "B":
+                unlockedPackIndexesTEMP.push(2);
                 break;
             case "Unlock All":
-
+                unlockedPackIndexesTEMP.push(1,2,3);
+            break;
+            case "Unlock All All":
+                unlockedPackIndexesTEMP.push(1,2,3,4,5,6,7,8,9);
                 break;
             default:
+                break;
             // code block
         }
+        this.setState({unlockedPackIndexes: unlockedPackIndexesTEMP});
+        this.setState({unlockInput: ''});
+        this.triggerChildAlert();
+        console.log("Unlocked Packs: " + this.state.unlockedPackIndexes);
     }
     // Changes 'unlockInput' to inputted value
     unlockInputChange(e) {
         const unlockInputt = e.target.value;
         this.setState({ unlockInput: unlockInputt });
+    }
+    //
+    triggerChildAlert(){
+        // for(let i = 0; i < this.state.characters.length; i++) {
+        //     var ref = this.refs[i];
+        //     if (true)
+        //         ref.refresh();
+        //     console.log("ref: " + ref);
+        //
+        // }
+         for(let i = 0; i < this.state.characters.length; i++){
+
+            var pack = Math.floor(i/5);
+            var unlockedCheck = !(this.state.unlockedPackIndexes.indexOf(pack) === -1);
+
+            var ref = this.refs[i];
+            console.log("ref: " + ref );
+
+            if ( unlockedCheck ) {
+                ref.refresh();
+            }
+        }
     }
 
     //// POPULATE PAGE ////
@@ -90,11 +120,13 @@ class CharacterSelect extends Component {
 
             var index = (pack*5) + j;
             var unlockedCheck = !(this.state.unlockedPackIndexes.indexOf(pack) === -1);
-            
+            //console.log(unlockedCheck);
+
             character = this.state.characters[index];
             characters.push(
                 <Character
                     name = {character.name}
+                    ref = {index}
                     images = {character.images}
                     handlerCall = {this.characterHandler.bind(this)}
                     key = {index}
@@ -104,7 +136,7 @@ class CharacterSelect extends Component {
         }
         return characters;
     }
-    // Populates scene with packs
+    // Populates scene with packsa
     getAllPacks(numOfPacks) {
         var allPacks = [];
 
@@ -123,6 +155,7 @@ class CharacterSelect extends Component {
     //////////////////////////////
     /////////// RENDER ///////////
     render() {
+        //console.log("rendering ");
         return (
             <div>
                 <div className="allCharacters">
@@ -142,11 +175,8 @@ class CharacterSelect extends Component {
                     onClick={() => { this.unlockOnClick() }}>
                         UNLOCK
                     </button>
-                </div>
-
-                <div>
                     <button onClick={() => {this.startGameOnClick()}}>
-                        Start Game
+                        Start 
                     </button>
                 </div>
 
