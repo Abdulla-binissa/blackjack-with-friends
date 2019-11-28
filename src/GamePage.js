@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import logo from './logo.svg';
+//import ReactDOM from 'react-dom';
 import './App.css';
-
-import CharacterSelectPage from "./CharacterSelect/CharacterSelectPage";
 
 class GamePage extends React.Component {
     constructor(props) {

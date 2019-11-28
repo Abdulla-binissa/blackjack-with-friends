@@ -3,39 +3,61 @@ import React, { Component } from "react";
 import './Character.css';
 
 class Character extends Component {
-    state = {
-        name: this.props.name,
-        image: this.props.image,
-        unlocked: this.props.unlocked,
-        selected: this.props.selected
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            name: this.props.name,
+            images: this.props.images,
+            //key: this.props.key,
+            image: this.props.images[2], //Nuetral pic
 
-    //Checks image if null
-    hasImageCheck = () => {
-        if (this.state.image == null) {
-            this.state.image = require("./Images/imagePlaceHolder.jpg");
+            unlocked: this.props.unlocked,
+            selected: false,
+            color: "#5C5B59"
         }
-        return this.state.image;
-    }
+    };
 
     //OnClick
     onClick() {
-        this.selected = true;
-        console.log(this.selected);
+        //console.log(this.state.name);
+        if(!this.state.unlocked) {
+            console.log("Locked!");
+        }
+        else {
+            if(!this.state.selected) {
+                this.setState({selected: true});
+                this.setState({color: "#48BF84"});
+
+                this.props.handlerCall(true, this.state.name);
+            }
+            else {
+                this.setState({selected: false});
+                this.setState({color: "#5C5B59"});
+
+                this.props.handlerCall(false, this.state.name);
+            }
+        }
     }
-
-
-
-
 
     // ----------------- Render ----------------- //
     render() {
+        var borderColor = "5px solid " + this.state.color;
         return (
-            <a className="character"
-                onClick={() => this.onClick()}>
-                <img className="thumbnail" src={this.hasImageCheck()}></img>
-                {this.props.name}
-            </a>
+            <button
+            className="character"
+            onClick={() => this.onClick()}>
+
+                <img
+                className="thumbnail"
+                alt={this.state.name}
+                style={{border: borderColor}}
+                src={this.state.image}/>
+
+                <div
+                className="thumbnailText">
+                    {this.state.name}</div>
+
+            </button>
         );
     }
 }

@@ -7,60 +7,61 @@ import Character from "./Character";
 class CharacterSelect extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            characters: [],
-            selectedCharacters: [],
-            numberOfSelectedCharacters: 0,
+            characters: this.props.characters,
+            numberOfPacks: 10,
+
+            selectedCharactersNames: [],
+            unlockedPackIndexes: [0],
             unlockInput: ''
         };
 
+        // Values for unknown characters
+        const unknownCharacter = {
+            name:"UNKNOWN",
+            images:
+                [require("./Images/imagePlaceHolder.jpg"), // 0 Lost?
+                require("./Images/imagePlaceHolder.jpg"), // 1
+                require("./Images/imagePlaceHolder.jpg"), // 2 Nuetral
+                require("./Images/imagePlaceHolder.jpg"), // 3
+                require("./Images/imagePlaceHolder.jpg")]  // 4 win?
+        };
+
+        // Fill unknown values so characters[] is full of characters
+        this.state.characters = this.state.characters.concat(
+            new Array(50 - this.state.characters.length).fill(
+                unknownCharacter
+            )
+         );
     }
 
-    //Populates all Characters
-    populate() {
-        return (
-            <div className="allCharacters">
-                <div className="characterPack" id="pack1">
-                    <Character name="Name11" />
-                    <Character name="Name12" />
-                    <Character name="Name13" />
-                    <Character name="Name14" />
-                    <Character name="Name15" />
-                </div>
-                <div className="characterPack" id="pack2">
-                    <Character name="Name21" />
-                    <Character name="Name22" />
-                    <Character name="Name23" />
-                    <Character name="Name24" />
-                    <Character name="Name25" />
-                </div>
-                <div className="characterPack" id="pack3">
-                    <Character name="Name31" />
-                    <Character name="Name32" />
-                    <Character name="Name33" />
-                    <Character name="Name34" />
-                    <Character name="Name35" />
-                </div>
-            </div>
-        );
+    //
+    characterHandler(adding, character) {
+        var selected = this.state.selectedCharactersNames;
+        (adding)?
+            selected.push(character):
+            selected.splice( selected.indexOf(character) , 1);
 
-        /*
-        //iterate through packs
-        for (var i = 0; i < 1; i += 1) {
-            //iterate through characters in pack
-            for (var j = 0; j < 5; j += 1) {
-                { Characters[i + j] }
-            }
+        this.setState({ selectedCharactersNames: selected })
+    }
+
+    // Button that triggers game page
+    startGameOnClick() {
+        var characters = this.state.selectedCharactersNames;
+        if(characters.length === 5) {
+            this.props.handlerCall(this.state.selectedCharactersNames);
+            alert("Starting!");
         }
-        */
+        else {
+            alert("You have to pick 5 characters!");
+        }
     }
 
-
-
-    //Unlocks Characters depending on password inputted
+    //// UNLOCK WITH CODES ////
+    // Unlocks Characters depending on password inputted
     unlockOnClick() {
-        switch (this.unlockInput) {
+        console.log(this.state.unlockInput);
+        switch (this.state.unlockInput) {
             case "Trumpy Trump":
                 // code block
                 break;
@@ -74,24 +75,81 @@ class CharacterSelect extends Component {
             // code block
         }
     }
-
-    //Changes 'unlockInput' to inputted value
+    // Changes 'unlockInput' to inputted value
     unlockInputChange(e) {
-        const unlockInput = e.target.value;
-        this.setState({ unlockInput });
-        console.log("k");
+        const unlockInputt = e.target.value;
+        this.setState({ unlockInput: unlockInputt });
     }
 
+    //// POPULATE PAGE ////
+    // Populates known pack of 5
+    getCharactersPack(pack) {
+        var characters = [];
+        for(let j = 0; j < 5; j++) {
+            var character;
+
+            var index = (pack*5) + j;
+            var unlockedCheck = !(this.state.unlockedPackIndexes.indexOf(pack) === -1);
+            
+            character = this.state.characters[index];
+            characters.push(
+                <Character
+                    name = {character.name}
+                    images = {character.images}
+                    handlerCall = {this.characterHandler.bind(this)}
+                    key = {index}
+                    unlocked = {unlockedCheck}
+                />
+            );
+        }
+        return characters;
+    }
+    // Populates scene with packs
+    getAllPacks(numOfPacks) {
+        var allPacks = [];
+
+        for(let i = 0; i < numOfPacks; i++) {
+            allPacks.push(
+                <div className="characterPack" key = {i}>
+                    {this.getCharactersPack(i)}
+                </div>
+            );
+        }
+
+        return allPacks;
+
+    }
+
+    //////////////////////////////
+    /////////// RENDER ///////////
     render() {
         return (
             <div>
-                {this.populate()}
+                <div className="allCharacters">
+                    {this.getAllPacks(this.state.numberOfPacks)}
+                </div>
+
                 <div className="unlockArea">
                     <form>
-                        <input type="text" name="characterUnlock" placeholder="???" value={this.state.unlockInput} onChange={this.unlockInputChange.bind(this)} />
+                        <input
+                        type="text"
+                        name="characterUnlock"
+                        placeholder="???"
+                        value={this.state.unlockInput}
+                        onChange={this.unlockInputChange.bind(this)} />
                     </form>
-                    <button onClick={() => { this.unlockOnClick() }}> UNLOCK </button>
+                    <button
+                    onClick={() => { this.unlockOnClick() }}>
+                        UNLOCK
+                    </button>
                 </div>
+
+                <div>
+                    <button onClick={() => {this.startGameOnClick()}}>
+                        Start Game
+                    </button>
+                </div>
+
             </div>
         );
     }

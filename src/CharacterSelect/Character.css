@@ -1,7 +1,7 @@
 
 .allCharacters{
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 50px auto 0 auto;
     align-items: center;
 }
 
@@ -12,11 +12,16 @@
 }
 
 .character{
+    background-color: transparent;
+    outline: none;
+    border: 0;
+
     float: left;
     height:100px;
     width: 100px;
     margin: auto;
-    
+
+    /* position: relative; */
     text-align: center;
 }
 
@@ -26,6 +31,19 @@
 
     border: 5px solid #5C5B59;
     border-radius: 20%;
+
+    object-fit: cover
+}
+
+.thumbnail img {
+}
+
+.thumbnailText {
+    /*
+    position: absolute;
+    bottom: 25px;
+    left: 18%;
+    */
 }
 
 .unlockArea{
