@@ -10,12 +10,12 @@ class App extends React.Component {
         super(props);
         this.state = {
             characters: [
-                {name: "0-NAME", images:
-                    [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
-                    require("./CharacterSelect/Images/Smiley.png"), // 1
-                    require("./CharacterSelect/Images/Smiley.png"), // 2 Nuetral
-                    require("./CharacterSelect/Images/Smiley.png"), // 3
-                    require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
+                {name: "Danny Devito", images:
+                    [require("./Images/DannyDevito/DannyDevitoDefeat.jpg"), // 0 Lost?
+                    require("./Images/DannyDevito/DannyDevitoLosing.jpg"), // 1
+                    require("./Images/DannyDevito/DannyDevitoNeutral.jpg"), // 2 Nuetral
+                    require("./Images/DannyDevito/DannyDevitoHappy.jpg"), // 3
+                    require("./Images/DannyDevito/DannyDevitoVictory.jpg")]  // 4 win?
                 },
                 {name: "1-NAME", images:
                     [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
