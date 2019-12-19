@@ -10,7 +10,6 @@ class CharacterSelect extends Component {
         this.state = {
             characters: this.props.characters,
             numberOfPacks: 10,
-
             selectedCharactersNames: [],
             unlockedPackIndexes: [0],
             unlockInput: ''

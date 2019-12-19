@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
+import './Components/Players.js';
 
 import CharacterSelectPage from "./CharacterSelect/CharacterSelectPage";
-//import GamePage from "./GamePage";
+import GamePage from "./GamePage";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             characters: [
-                {name: "Danny Devito", images:
+                {name: "Danny Devito", bet: 100, wallet: 500 ,images:
                     [require("./Images/DannyDevito/DannyDevitoDefeat.jpg"), // 0 Lost?
                     require("./Images/DannyDevito/DannyDevitoLosing.jpg"), // 1
                     require("./Images/DannyDevito/DannyDevitoNeutral.jpg"), // 2 Nuetral
@@ -95,15 +96,15 @@ class App extends React.Component {
     render() {
         return (
             <div className="container">
-
+{/*
                 <CharacterSelectPage
                 characters = {this.state.characters}
                 handlerCall = {this.characterSelectPageHandler.bind(this)}/>
-
-                {/*<GamePage
+*/}
+                <GamePage
                      characters = {this.state.characters}
                      selectedCharactersIndexes = {this.state.characters}
-                />*/}
+                />
 
             </div>
         );

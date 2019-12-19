@@ -8,9 +8,10 @@ class Character extends Component {
         this.state = {
             //originalName: this.props.name,
             name: (this.props.unlocked) ? this.props.name : "LOCKED" ,
+            bet: this.state.bet,
+            wallet: this.props.wallet,
             images: this.props.images,
             image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic
-
             unlocked: this.props.unlocked,
             selected: false,
             color: "#5C5B59"
