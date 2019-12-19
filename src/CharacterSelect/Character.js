@@ -11,7 +11,8 @@ class Character extends Component {
             bet: this.state.bet,
             wallet: this.props.wallet,
             images: this.props.images,
-            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic
+            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic or Locked
+
             unlocked: this.props.unlocked,
             selected: false,
             color: "#5C5B59"

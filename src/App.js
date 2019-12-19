@@ -1,22 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import './App.css';
 import './Components/Players.js';
 
 import CharacterSelectPage from "./CharacterSelect/CharacterSelectPage";
 import GamePage from "./GamePage";
+import TitlePage from "./TitlePage";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             characters: [
-                {name: "Danny Devito", bet: 100, wallet: 500 ,images:
-                    [require("./Images/DannyDevito/DannyDevitoDefeat.jpg"), // 0 Lost?
-                    require("./Images/DannyDevito/DannyDevitoLosing.jpg"), // 1
-                    require("./Images/DannyDevito/DannyDevitoNeutral.jpg"), // 2 Nuetral
-                    require("./Images/DannyDevito/DannyDevitoHappy.jpg"), // 3
-                    require("./Images/DannyDevito/DannyDevitoVictory.jpg")]  // 4 win?
+                {name: "Danny Devito", wallet: 100, bet: 25, images:
+                    [require("./Images/Celebrity Pack/DannyDevitoDefeat.jpg"), // 0 Lost?
+                    require("./Images/Celebrity Pack/DannyDevitoLosing.jpg"), // 1
+                    require("./Images/Celebrity Pack/DannyDevitoNeutral.jpg"), // 2 Nuetral
+                    require("./Images/Celebrity Pack/DannyDevitoHappy.jpg"), // 3
+                    require("./Images/Celebrity Pack/DannyDevitoVictory.jpg")]  // 4 win?
                 },
                 {name: "1-NAME", images:
                     [require("./CharacterSelect/Images/Smiley.png"), // 0 Lost?
@@ -96,16 +98,26 @@ class App extends React.Component {
     render() {
         return (
             <div className="container">
-{/*
-                <CharacterSelectPage
-                characters = {this.state.characters}
-                handlerCall = {this.characterSelectPageHandler.bind(this)}/>
-*/}
-                <GamePage
-                     characters = {this.state.characters}
-                     selectedCharactersIndexes = {this.state.characters}
-                />
+                <Router>
 
+                    <Route path="/">
+                        <TitlePage />
+                    </Route>
+
+                    <Route path="/CharacterSelectPage">
+                        <CharacterSelectPage
+                            characters = {this.state.characters}
+                            handlerCall = {this.characterSelectPageHandler.bind(this)}/>
+                    </Route>
+
+                    <Route path="/GamePage">
+                        <GamePage
+                             characters = {this.state.characters}
+                             selectedCharactersIndexes = {this.state.characters}
+                        />
+                    </Route>
+
+                </Router>
             </div>
         );
     }
