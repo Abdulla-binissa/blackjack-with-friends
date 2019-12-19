@@ -9,7 +9,7 @@ class Character extends Component {
             //originalName: this.props.name,
             name: (this.props.unlocked) ? this.props.name : "LOCKED" ,
             images: this.props.images,
-            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic
+            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic or Locked
 
             unlocked: this.props.unlocked,
             selected: false,

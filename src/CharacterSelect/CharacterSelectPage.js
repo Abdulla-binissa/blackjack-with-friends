@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../App.css";
 import './Character.css';
 
@@ -29,13 +30,12 @@ class CharacterSelect extends Component {
 
         // Fill unknown values so characters[] is full of characters
         this.state.characters = this.state.characters.concat(
-            new Array(50 - this.state.characters.length).fill(
-                unknownCharacter
-            )
+            new Array((this.state.numberOfPacks*5) - this.state.characters.length)
+                .fill(unknownCharacter)
          );
     }
 
-    //
+    // Addikng or subtractingcharacter from Selected array
     characterHandler(adding, character) {
         var selected = this.state.selectedCharactersNames;
         (adding)?
@@ -178,6 +178,20 @@ class CharacterSelect extends Component {
                     <button onClick={() => {this.startGameOnClick()}}>
                         Start 
                     </button>
+                    // <Link
+                    //     to="/"
+                    //     innerRef={node => {
+                    //         var characters = this.state.selectedCharactersNames;
+                    //         if(characters.length === 5) {
+                    //             this.props.handlerCall(this.state.selectedCharactersNames);
+                    //
+                    //             alert("Starting!");
+                    //         }
+                    //         else {
+                    //             alert("You have to pick 5 characters!");
+                    //         }
+                    //     }}
+                    // />
                 </div>
 
             </div>
