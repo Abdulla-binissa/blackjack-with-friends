@@ -214,7 +214,7 @@ class GamePage extends React.Component {
                 } else if (winner === 'player') {
                     wallet += this.state.currentBet * 2;
                     message = 'You win!';
-                } else if (winner === 'player & player2')  {
+                } else if (winner === 'player & player2') {
                     message = 'You and player2 win';
                 } else if (winner === 'player2') {
                     message = 'Player 2 wins';
@@ -328,6 +328,7 @@ class GamePage extends React.Component {
                         </div>
                         : null
                 }
+
                 <p>Your Hand ({this.state.player.count})</p>
                 <table className="cards">
                     <tr>
@@ -337,9 +338,10 @@ class GamePage extends React.Component {
                     </tr>
                 </table>
 
-                <p>Player2's Hand ({this.state.player2.count})</p>
+                <p>{this.state.selectedCharacters[0].name}'s Hand ({this.state.player2.count})</p>
                 <table className="cards">
                     <tr>
+                        <img className="enemy" src={this.state.selectedCharacters[0].images[1]} />
                         {this.state.player2.cards.map((card, i) => {
                             return <Card key={i} number={card.number} suit={card.suit} />;
                         })}
