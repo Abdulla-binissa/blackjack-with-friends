@@ -169,10 +169,6 @@ class GamePage extends React.Component {
     }
 
     stand() {
-        console.log(player2.count);
-        console.log(dealer.count);
-
-
         if (!this.state.gameOver) {
             // Show dealer's 2nd card
             const randomCard = this.getRandomCard(this.state.deck);
