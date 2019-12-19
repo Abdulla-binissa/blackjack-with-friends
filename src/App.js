@@ -20,7 +20,7 @@ class App extends React.Component {
                     require("./Images/Celebrity Pack/DannyDevitoHappy.jpg"), // 3
                     require("./Images/Celebrity Pack/DannyDevitoVictory.jpg")]  // 4 win
                 },
-                {name: "BradleyCooper", wallet: 100, bet: 25, images:
+                {name: "B. Cooper", wallet: 100, bet: 25, images:
                     [require("./Images/Celebrity Pack/BradleyCooperDefeat.jpg"), // 0 Lost
                     require("./Images/Celebrity Pack/BradleyCooperUpset.jpg"), // 1
                     require("./Images/Celebrity Pack/BradleyCooperNeutral.jpg"), // 2 Nuetral
@@ -131,27 +131,34 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <Router>
+            <div className="App">
 
-                    <Route exact path="/">
-                        <TitlePage />
-                    </Route>
+                <header className="masterhead">
+                    <h1>BlackJack with Friends</h1>
+                </header>
+                
+                <div className="container">
+                    <Router>
 
-                    <Route exact path="/CharacterSelectPage">
-                        <CharacterSelectPage
-                            characters = {this.state.characters}
-                            handlerCall = {this.characterSelectPageHandler.bind(this)}/>
-                    </Route>
+                        <Route exact path="/">
+                            <TitlePage />
+                        </Route>
 
-                    <Route exact path="/GamePage">
-                        <GamePage
-                             characters = {this.state.characters}
-                             selectedCharactersIndexes = {this.state.characters}
-                        />
-                    </Route>
+                        <Route exact path="/CharacterSelectPage">
+                            <CharacterSelectPage
+                                characters = {this.state.characters}
+                                handlerCall = {this.characterSelectPageHandler.bind(this)}/>
+                        </Route>
 
-                </Router>
+                        <Route exact path="/GamePage">
+                            <GamePage
+                                 characters = {this.state.characters}
+                                 selectedCharactersIndexes = {this.state.characters}
+                            />
+                        </Route>
+
+                    </Router>
+                </div>
             </div>
         );
     }

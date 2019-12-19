@@ -15,7 +15,9 @@ class TitlePage extends Component {
         return (
             <div>
                 <Link to="/CharacterSelectPage">
-                    Begin!
+                    <div className="titlePageStart">
+                        Start
+                    </div>
                 </Link>
             </div>
         );

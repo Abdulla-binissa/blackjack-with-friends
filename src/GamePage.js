@@ -7,7 +7,7 @@ class GamePage extends React.Component {
         super(props);
 
         this.state = {
-            characters: this.props.characters,
+            selectedCharacters: this.props.selectedCharacters,
             deck: [],
             dealer: null,
             player: null,

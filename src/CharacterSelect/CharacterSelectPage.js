@@ -10,7 +10,7 @@ class CharacterSelect extends Component {
         super(props);
         this.state = {
             characters: this.props.characters,
-            numberOfPacks: 10,
+            numberOfPacks: 6,
             selectedCharacters: [],
             unlockedPackIndexes: [0],
             unlockInput: ''
@@ -49,10 +49,19 @@ class CharacterSelect extends Component {
         var characters = this.state.selectedCharacters;
         if(characters.length === 5) {
             this.props.handlerCall(this.state.selectedCharacters);
-            alert("Starting!");
+            //alert("Starting!");
+        }
+        else if(characters.length > 5) {
+            this.state.selectedCharacters = this.state.selectedCharacters.splice(0, 5);
+            this.props.handlerCall(this.state.selectedCharacters);
         }
         else {
-            alert("You have to pick 5 characters!");
+            this.state.selectedCharacters = this.state.selectedCharacters.concat(
+                new Array(5 - this.state.selectedCharacters.length)
+                    .fill(this.state.characters[0])
+             );
+             this.props.handlerCall(this.state.selectedCharacters);
+            //alert("You have to pick 5 characters!");
         }
     }
 
@@ -163,9 +172,11 @@ class CharacterSelect extends Component {
                     onClick={() => { this.unlockOnClick() }}>
                         UNLOCK
                     </button>
-                    <button onClick={() => {this.startGameOnClick()}}>
-                        Start
-                    </button>
+                    <Link to="/GamePage">
+                        <button onClick={() => {this.startGameOnClick()}}>
+                            Start
+                        </button>
+                    </Link>
                 </div>
 
             </div>
