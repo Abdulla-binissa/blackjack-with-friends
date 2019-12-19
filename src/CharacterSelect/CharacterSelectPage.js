@@ -177,7 +177,7 @@ class CharacterSelect extends Component {
                     <button onClick={() => {this.startGameOnClick()}}>
                         Start 
                     </button>
-                    // <Link
+                    {/* <Link 
                     //     to="/"
                     //     innerRef={node => {
                     //         var characters = this.state.selectedCharactersNames;
@@ -190,7 +190,7 @@ class CharacterSelect extends Component {
                     //             alert("You have to pick 5 characters!");
                     //         }
                     //     }}
-                    // />
+                    // />*/}
                 </div>
 
             </div>
