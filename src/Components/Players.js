@@ -10,14 +10,23 @@ export class Players extends Component {
         this.state = {
             bet: 25,
             wallet: 100,
-            name: this.state.characters[0].name
+            name: this.props.name,
+            image: this.props.image
         };
     }
-    
+
     render() {
         return (
-            <div>
-                
+            <div className="character">
+                <img
+                className="thumbnail"
+                alt={this.state.name}
+                src={this.state.image}/>
+
+                <div
+                className="thumbnailText">
+                    {this.state.name}</div>
+
             </div>
         )
     }

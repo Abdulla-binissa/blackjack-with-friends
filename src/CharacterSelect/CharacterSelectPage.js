@@ -11,7 +11,7 @@ class CharacterSelect extends Component {
         this.state = {
             characters: this.props.characters,
             numberOfPacks: 10,
-            selectedCharactersNames: [],
+            selectedCharacters: [],
             unlockedPackIndexes: [0],
             unlockInput: ''
         };
@@ -36,19 +36,19 @@ class CharacterSelect extends Component {
 
     // Addikng or subtractingcharacter from Selected array
     characterHandler(adding, character) {
-        var selected = this.state.selectedCharactersNames;
+        var selected = this.state.selectedCharacters;
         (adding)?
             selected.push(character):
             selected.splice( selected.indexOf(character) , 1);
 
-        this.setState({ selectedCharactersNames: selected })
+        this.setState({ selectedCharacters: selected })
     }
 
     // Button that triggers game page
     startGameOnClick() {
-        var characters = this.state.selectedCharactersNames;
+        var characters = this.state.selectedCharacters;
         if(characters.length === 5) {
-            this.props.handlerCall(this.state.selectedCharactersNames);
+            this.props.handlerCall(this.state.selectedCharacters);
             alert("Starting!");
         }
         else {
@@ -61,18 +61,15 @@ class CharacterSelect extends Component {
     unlockOnClick() {
         var unlockedPackIndexesTEMP = this.state.unlockedPackIndexes;
         switch (this.state.unlockInput) {
-            case "A":
+            case "World Domination": // Dictators
                 unlockedPackIndexesTEMP.push(1);
                 break;
-            case "B":
+            case "Polly": // Politics
                 unlockedPackIndexesTEMP.push(2);
                 break;
-            case "Unlock All":
-                unlockedPackIndexesTEMP.push(1,2,3);
+            case "Supreme": // Unlock All
+                unlockedPackIndexesTEMP.push(1,2);
             break;
-            case "Unlock All All":
-                unlockedPackIndexesTEMP.push(1,2,3,4,5,6,7,8,9);
-                break;
             default:
                 break;
             // code block
@@ -88,14 +85,7 @@ class CharacterSelect extends Component {
         this.setState({ unlockInput: unlockInputt });
     }
     //
-    triggerChildAlert(){
-        // for(let i = 0; i < this.state.characters.length; i++) {
-        //     var ref = this.refs[i];
-        //     if (true)
-        //         ref.refresh();
-        //     console.log("ref: " + ref);
-        //
-        // }
+    triggerChildAlert() {
          for(let i = 0; i < this.state.characters.length; i++){
 
             var pack = Math.floor(i/5);
@@ -154,7 +144,6 @@ class CharacterSelect extends Component {
     //////////////////////////////
     /////////// RENDER ///////////
     render() {
-        //console.log("rendering ");
         return (
             <div>
                 <div className="allCharacters">
@@ -175,22 +164,8 @@ class CharacterSelect extends Component {
                         UNLOCK
                     </button>
                     <button onClick={() => {this.startGameOnClick()}}>
-                        Start 
+                        Start
                     </button>
-                    {/* <Link 
-                    //     to="/"
-                    //     innerRef={node => {
-                    //         var characters = this.state.selectedCharactersNames;
-                    //         if(characters.length === 5) {
-                    //             this.props.handlerCall(this.state.selectedCharactersNames);
-                    //
-                    //             alert("Starting!");
-                    //         }
-                    //         else {
-                    //             alert("You have to pick 5 characters!");
-                    //         }
-                    //     }}
-                    // />*/}
                 </div>
 
             </div>

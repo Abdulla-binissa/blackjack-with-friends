@@ -84,15 +84,14 @@ class App extends React.Component {
                     require("./CharacterSelect/Images/Smiley.png")]  // 4 win?
                 },
             ],
-            selectedCharactersNames: []
+            selectedCharacters: []
         };
 
     }
 
     // Saves data from character select page into selectedCharactersNames[];
     characterSelectPageHandler(selectedCharacters) {
-        this.setState({selectedCharactersNames: (selectedCharacters)})
-        console.log("Selected Chars: " + selectedCharacters);
+        this.setState({selectedCharacters: (selectedCharacters)})
     }
 
     render() {
@@ -100,17 +99,17 @@ class App extends React.Component {
             <div className="container">
                 <Router>
 
-                    <Route path="/">
+                    <Route exact path="/">
                         <TitlePage />
                     </Route>
 
-                    <Route path="/CharacterSelectPage">
+                    <Route exact path="/CharacterSelectPage">
                         <CharacterSelectPage
                             characters = {this.state.characters}
                             handlerCall = {this.characterSelectPageHandler.bind(this)}/>
                     </Route>
 
-                    <Route path="/GamePage">
+                    <Route exact path="/GamePage">
                         <GamePage
                              characters = {this.state.characters}
                              selectedCharactersIndexes = {this.state.characters}
