@@ -11,7 +11,7 @@ export class Players extends Component {
             bet: 25,
             wallet: 100,
             name: this.props.name,
-            image: this.props.image
+            images: this.props.images
         };
     }
 
@@ -21,7 +21,7 @@ export class Players extends Component {
                 <img
                 className="thumbnail"
                 alt={this.state.name}
-                src={this.state.image}/>
+                src={this.state.images[0]}/>
 
                 <div
                 className="thumbnailText">
