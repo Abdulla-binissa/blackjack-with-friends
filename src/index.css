@@ -1,12 +1,29 @@
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Source Sans Pro", "Helvetica", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
 body {
-  font-family: 'Lucida Sans Unicode';
-  background: #4CA1AF;
-  background: -webkit-linear-gradient(to left, #4CA1AF , #C4E0E5);
-  background: linear-gradient(to left, #4CA1AF , #C4E0E5);
+  background-image: linear-gradient(#E5DADA , #A8F9FF);
+  background-attachment: fixed;
+  background-size: 100%;
+  margin: 0;
 }
 
 button {
   margin: 0 10px 0 10px;
+
+  border: 5px solid #5C5B59;
+  border-radius: 10px;
+
+
 }
 
 form {

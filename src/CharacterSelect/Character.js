@@ -8,8 +8,10 @@ class Character extends Component {
         this.state = {
             //originalName: this.props.name,
             name: (this.props.unlocked) ? this.props.name : "LOCKED" ,
+            bet: this.props.bet,
+            wallet: this.props.wallet,
             images: this.props.images,
-            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic
+            image: (this.props.unlocked) ? this.props.images[2] : require("./Images/Locked.jpg"), //Nuetral pic or Locked
 
             unlocked: this.props.unlocked,
             selected: false,
@@ -27,18 +29,15 @@ class Character extends Component {
                 this.setState({selected: true});
                 this.setState({color: "#48BF84"});
 
-                this.props.handlerCall(true, this.state.name);
+                this.props.handlerCall(true, this.state);
             }
             else {
                 this.setState({selected: false});
                 this.setState({color: "#5C5B59"});
 
-                this.props.handlerCall(false, this.state.name);
+                this.props.handlerCall(false, this.state);
             }
         }
-
-        //this.setState({ name: this.props.name});
-        //this.setState({ image: this.props.images[2]});
     }
 
     refresh() {

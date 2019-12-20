@@ -1,16 +1,24 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import './App.css';
+import Player from './Components/Players';
+import CharacterSelect from './CharacterSelect/CharacterSelectPage';
 
 class GamePage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            Player: this.props.selectedCharacters,
+            selectedCharacters: this.props.selectedCharacters,
             deck: [],
             dealer: null,
             player: null,
+            player2: null,
             wallet: 0,
+            p2Wallet: 1000,
+            p2Bet: 100,
+            p2Broke: false,
             inputValue: '',
             currentBet: null,
             gameOver: false,
@@ -33,9 +41,11 @@ class GamePage extends React.Component {
     dealCards(deck) {
         const playerCard1 = this.getRandomCard(deck);
         const dealerCard1 = this.getRandomCard(playerCard1.updatedDeck);
-        const playerCard2 = this.getRandomCard(dealerCard1.updatedDeck);
+        const player2Card1 = this.getRandomCard(dealerCard1.updatedDeck);
+        const playerCard2 = this.getRandomCard(player2Card1.updatedDeck);
         const playerStartingHand = [playerCard1.randomCard, playerCard2.randomCard];
         const dealerStartingHand = [dealerCard1.randomCard, {}];
+        const player2StartingHand = [player2Card1.randomCard, {}];
 
         const player = {
             cards: playerStartingHand,
@@ -45,20 +55,25 @@ class GamePage extends React.Component {
             cards: dealerStartingHand,
             count: this.getCount(dealerStartingHand)
         };
+        const player2 = {
+            cards: player2StartingHand,
+            count: this.getCount(player2StartingHand)
+        };
 
-        return { updatedDeck: playerCard2.updatedDeck, player, dealer };
+        return { updatedDeck: playerCard2.updatedDeck, player, dealer, player2 };
     }
 
     startNewGame(type) {
         if (type === 'continue') {
             if (this.state.wallet > 0) {
                 const deck = (this.state.deck.length < 10) ? this.generateDeck() : this.state.deck;
-                const { updatedDeck, player, dealer } = this.dealCards(deck);
+                const { updatedDeck, player, dealer, player2 } = this.dealCards(deck);
 
                 this.setState({
                     deck: updatedDeck,
                     dealer,
                     player,
+                    player2,
                     currentBet: null,
                     gameOver: false,
                     message: null
@@ -68,13 +83,15 @@ class GamePage extends React.Component {
             }
         } else {
             const deck = this.generateDeck();
-            const { updatedDeck, player, dealer } = this.dealCards(deck);
+            const { updatedDeck, player, dealer, player2 } = this.dealCards(deck);
 
             this.setState({
                 deck: updatedDeck,
                 dealer,
                 player,
                 wallet: 100,
+                p2Wallet: 1000,
+                player2,
                 inputValue: '',
                 currentBet: null,
                 gameOver: false,
@@ -102,6 +119,13 @@ class GamePage extends React.Component {
             // Deduct current bet from wallet
             const wallet = this.state.wallet - currentBet;
             this.setState({ wallet, inputValue: '', currentBet });
+        }
+        if(this.state.p2Wallet == 0) {
+            console.log('p2 is broke as a joke');
+            this.setState({p2Wallet : 0, p2Broke : true});
+        } else {
+            const p2Wallet = this.state.p2Wallet - this.state.p2Bet;
+            this.setState({p2Wallet});
         }
     }
 
@@ -141,9 +165,6 @@ class GamePage extends React.Component {
             } else if (card.number) {
                 rearranged.unshift(card);
             }
-
-
-            // (card.number === 'A') ? rearranged.push(card) : rearranged.unshift(card);
         });
 
         return rearranged.reduce((total, card) => {
@@ -167,6 +188,12 @@ class GamePage extends React.Component {
             dealer.cards.push(randomCard.randomCard);
             dealer.count = this.getCount(dealer.cards);
 
+            const p2RandomCard = this.getRandomCard(deck);
+            let player2 = this.state.player2;
+            player2.cards.pop();
+            player2.cards.push(p2RandomCard.randomCard);
+            player2.count = this.getCount(player2.cards);
+
             // Keep drawing cards until count is 17 or more
             while (dealer.count < 17) {
                 const draw = this.dealerDraw(dealer, deck);
@@ -174,17 +201,24 @@ class GamePage extends React.Component {
                 deck = draw.updatedDeck;
             }
 
+            while (player2.count < 10) {
+                const draw1 = this.dealerDraw(player2, deck);
+                player2 = draw1.player2;
+                deck = draw1.updatedDeck;
+            }
             if (dealer.count > 21) {
                 this.setState({
                     deck,
                     dealer,
                     wallet: this.state.wallet + this.state.currentBet * 2,
+                    p2Wallet: this.state.p2Wallet + this.state.p2Bet * 2,
                     gameOver: true,
-                    message: 'Dealer bust! You win!'
+                    message: 'Dealer bust!'
                 });
             } else {
-                const winner = this.getWinner(dealer, this.state.player);
+                const winner = this.getWinner(dealer, this.state.player, this.state.player2);
                 let wallet = this.state.wallet;
+                let p2Wallet = this.state.p2Wallet;
                 let message;
 
                 if (winner === 'dealer') {
@@ -192,15 +226,26 @@ class GamePage extends React.Component {
                 } else if (winner === 'player') {
                     wallet += this.state.currentBet * 2;
                     message = 'You win!';
+                    p2Wallet -= this.state.p2Bet;
+                } else if (winner === 'player & player2') {
+                    message = 'You and player2 win';
+                    wallet += this.state.currentBet * 2;
+                    p2Wallet += this.state.p2Bet * 2;
+                } else if (winner === 'player2') {
+                    message = 'Player 2 wins';
+                    p2Wallet += this.state.p2Bet * 2;
                 } else {
                     wallet += this.state.currentBet;
+                    p2Wallet += this.state.p2Bet;
                     message = 'Push.';
                 }
 
                 this.setState({
                     deck,
                     dealer,
+                    player2,
                     wallet,
+                    p2Wallet,
                     gameOver: true,
                     message
                 });
@@ -210,11 +255,19 @@ class GamePage extends React.Component {
         }
     }
 
-    getWinner(dealer, player) {
-        if (dealer.count > player.count) {
+    getWinner(dealer, player, player2) {
+        if (dealer.count > player.count && dealer.count > player2.count) {
             return 'dealer';
-        } else if (dealer.count < player.count) {
+        } else if (dealer.count < player.count && dealer.count > player2.count) {
             return 'player';
+        } else if (dealer.count < player.count && dealer.count == player2.count) {
+            return 'player';
+        } else if (dealer.count < player.count && dealer.count < player2.count) {
+            return 'player & player2';
+        } else if (dealer.count > player.count && dealer.count < player2.count) {
+            return 'player2';
+        } else if (dealer.count == player.count && dealer.count < player2.count) {
+            return 'player2';
         } else {
             return 'push';
         }
@@ -256,6 +309,20 @@ class GamePage extends React.Component {
                 dealerCount = card1;
             }
         }
+        let player2Count;
+        const p2card1 = this.state.player2.cards[0].number;
+        const p2card2 = this.state.player2.cards[1].number;
+        if (p2card2) {
+            player2Count = this.state.player2.count;
+        } else {
+            if (p2card1 === 'J' || p2card1 === 'Q' || p2card1 === 'K') {
+                player2Count = 10;
+            } else if (p2card1 === 'A') {
+                player2Count = 11;
+            } else {
+                player2Count = p2card1;
+            }
+        }
 
         return (
             <div>
@@ -265,7 +332,8 @@ class GamePage extends React.Component {
                     <button onClick={() => { this.stand() }}>Stand</button>
                 </div>
 
-                <p>Wallet: ${this.state.wallet}</p>
+                <p>Your Wallet: ${this.state.wallet}</p>
+                <p>Leo's Wallet: ${this.state.p2Wallet}</p>
                 {
                     !this.state.currentBet ?
                         <div className="input-bet">
@@ -283,11 +351,26 @@ class GamePage extends React.Component {
                         </div>
                         : null
                 }
-                <p>Your Hand ({this.state.player.count})</p>
-                <table className="cards">
+
+                <div style={{overflow: "hidden"}}>
+                    <p style={{float: "left",  paddingLeft: "40px"}}>Your Hand ({this.state.player.count})</p>
+                    <p style={{float: "right", paddingRight: "35px"}}>{this.state.player2.name}Leo's Hand ({this.state.player2.count})</p>
+                </div>
+                
+                <table style={{float: "left"}} className="cards">
                     <tr>
                         {this.state.player.cards.map((card, i) => {
                             return <Card key={i} number={card.number} suit={card.suit} />
+                        })}
+                    </tr>
+                </table>
+
+                {/* <p>{this.state.selectedCharacters[0].name}'s Hand ({this.state.player2.count})</p> */}
+                <table style={{float: "right"}} className="cards">
+                    <tr>
+                        {/* <img className="enemy" src={this.state.player2.images[0]} /> */}
+                        {this.state.player2.cards.map((card, i) => {
+                            return <Card key={i} number={card.number} suit={card.suit} />;
                         })}
                     </tr>
                 </table>
