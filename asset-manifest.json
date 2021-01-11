@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/blackjack-with-friends/static/css/main.4ce88e6d.chunk.css",
-    "main.js": "/blackjack-with-friends/static/js/main.4d933233.chunk.js",
-    "main.js.map": "/blackjack-with-friends/static/js/main.4d933233.chunk.js.map",
+    "main.js": "/blackjack-with-friends/static/js/main.477e36bb.chunk.js",
+    "main.js.map": "/blackjack-with-friends/static/js/main.477e36bb.chunk.js.map",
     "runtime-main.js": "/blackjack-with-friends/static/js/runtime-main.4da209d0.js",
     "runtime-main.js.map": "/blackjack-with-friends/static/js/runtime-main.4da209d0.js.map",
     "static/js/2.7859c578.chunk.js": "/blackjack-with-friends/static/js/2.7859c578.chunk.js",
     "static/js/2.7859c578.chunk.js.map": "/blackjack-with-friends/static/js/2.7859c578.chunk.js.map",
     "index.html": "/blackjack-with-friends/index.html",
-    "precache-manifest.9ac49c9e6717f3989b5966cee19bcd97.js": "/blackjack-with-friends/precache-manifest.9ac49c9e6717f3989b5966cee19bcd97.js",
+    "precache-manifest.c934e5ce5ccf675ceef77d77ca03fab1.js": "/blackjack-with-friends/precache-manifest.c934e5ce5ccf675ceef77d77ca03fab1.js",
     "service-worker.js": "/blackjack-with-friends/service-worker.js",
     "static/css/main.4ce88e6d.chunk.css.map": "/blackjack-with-friends/static/css/main.4ce88e6d.chunk.css.map",
     "static/js/2.7859c578.chunk.js.LICENSE": "/blackjack-with-friends/static/js/2.7859c578.chunk.js.LICENSE",
@@ -93,6 +93,6 @@
     "static/js/runtime-main.4da209d0.js",
     "static/js/2.7859c578.chunk.js",
     "static/css/main.4ce88e6d.chunk.css",
-    "static/js/main.4d933233.chunk.js"
+    "static/js/main.477e36bb.chunk.js"
   ]
 }
