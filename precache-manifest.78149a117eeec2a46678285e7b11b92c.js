@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "236d5d38544ab6fd5ad2017010323599",
+    "revision": "7150571ca26b6c81bbfd4a8e9e18ac58",
     "url": "/blackjack-with-friends/index.html"
   },
   {
-    "revision": "e36b0ed51275a92c08b4",
+    "revision": "9e7ac8bb30c34bb69d09",
     "url": "/blackjack-with-friends/static/css/main.4ce88e6d.chunk.css"
   },
   {
-    "revision": "d24600d902ccae1db36f",
-    "url": "/blackjack-with-friends/static/js/2.7859c578.chunk.js"
+    "revision": "f1eaa41466daafb15f7d",
+    "url": "/blackjack-with-friends/static/js/2.7663e3e4.chunk.js"
   },
   {
     "revision": "783efe56c297789f679b639c509e9a30",
-    "url": "/blackjack-with-friends/static/js/2.7859c578.chunk.js.LICENSE"
+    "url": "/blackjack-with-friends/static/js/2.7663e3e4.chunk.js.LICENSE"
   },
   {
-    "revision": "e36b0ed51275a92c08b4",
-    "url": "/blackjack-with-friends/static/js/main.477e36bb.chunk.js"
+    "revision": "9e7ac8bb30c34bb69d09",
+    "url": "/blackjack-with-friends/static/js/main.2bdf1cf9.chunk.js"
   },
   {
     "revision": "03dfcd4881dfbcdb797f",
