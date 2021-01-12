@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
+import { HashRouter as Router, Route, useHistory } from "react-router-dom";
 import './App.css';
 import './Components/Players.js';
 
